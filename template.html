@@ -392,6 +392,143 @@ proguard.config=proguard.cfg
     </article>
   </slide>
 
+  <slide class="segue dark quote nobackground">
+    <aside class="gdbar right bottom"><img src="images/google_developers_icon_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>
+        Pero..... vamos a Hackear algo!
+      </h2>
+      <div class="author">
+        El "HelloWorld" de Android?
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Hackeando el HelloWorld</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Instalamos la aplicación <b>HelloWorld</b></li>
+      </ul>
+      <pre class="prettyprint" data-lang="shell">
+adb install HelloWord.apk
+      </pre>
+      <ul>
+        <li>Decompilamos</b></li>
+      </ul>
+      <pre class="prettyprint" data-lang="shell">
+java -jar apktool.jar d HelloWord.apk
+      </pre>
+      <ul>
+        <li>Podemos ver los paquetes, actividades,...</li>
+        <li>Android.MANIFEST</li>
+        <li>Carpetas:</li>
+        <ul>
+          <li><b>Smali</b></li>
+          <li><b>res</b></li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
+
+  <slide>
+    <hgroup>
+      <h2>Hackeando el HelloWorld (II)</h2>
+    </hgroup>
+    <article class="smaller">
+
+      <p>Incluimos el siguiente código en el código smali de la aplicación</p>
+
+    <pre class="prettyprint" data-lang="smali">
+
+    # Patches Start
+
+    invoke-virtual {p0}, Lcom/test/helloworld/HelloWorldActivity;->getApplicationContext()Landroid/content/Context;
+
+    move-result-object v1
+
+    const-string v2, "Hacked!"
+
+    const/4 v3, 0x0
+
+    invoke-static {v1, v2, v3}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Landroid/widget/Toast;->show()V
+
+    # Patches End
+  </pre>
+  </article>
+
+
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Hackeando el HelloWorld (III)</h2>
+    </hgroup>
+    <article>
+
+      <p>Construimos la nueva aplicación HelloWorld</p>
+
+      <pre class="prettyprint" data-lang="shell">
+java -jar apktool.jar b /HelloWord 
+      </pre>
+
+       <p>En la carpeta <b>dist</b> se ha creado la nueva aplicación HelloWorld.apk</p>
+  </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Hackeando el HelloWorld (IV)</h2>
+    </hgroup>
+    <article class="smaller">
+      <ul>
+        <li>¿Podríamos instalar ya esta aplicación?</li>
+        <li>No</li>
+        <li>El paquete está firmado?</li>
+        <li>Creamos </li>
+      </ul>
+
+      <pre class="smaller prettyprint" data-lang="shell">
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -validity 10000
+</pre>
+
+      <ul>
+        <li>Firmamos nuestra nueva .apk con el certificado</li>
+      </ul>
+            <pre class="smaller prettyprint" data-lang="shell">
+jarsigner -verbose -keystore my-release-key.keystore ./HelloWorld/dist/HelloWorld.apk alias_name
+</pre>
+
+      <ul>
+        <li>Instalamos esta nueva aplicación Hackeada!</li>
+      </ul>
+  </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>¿Es tan fácil hackear una aplicación?</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li><b>No</b> desde el Play Store</li>
+        <li>Markets alternativos</li>
+        <li>El problema de SwiftKey</li>
+        <ul>
+          <li>Instalamos en el emulador el SwiftKey con un Keylogger (<a href="http://www.android-app-development.ie/blog/wp-content/uploads/2013/03/SwiftKey_KeyLogger_android_app_development_ie.apk">Download</a>)</li>
+          <li>Vemos los logs de esa aplicación <a href="http://www.android-app-development.ie/swiftkey_keylogger/keylogs.php">aquí</a></li>
+        </ul>
+      </ul>
+    </article>
+  </slide>
+
 
   <slide class="thank-you-slide segue nobackground">
     <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside>
