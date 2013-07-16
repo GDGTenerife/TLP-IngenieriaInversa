@@ -1,0 +1,434 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/google_developers_logo.png"></span>
+    </article>
+  </slide>
+
+  <slide class="title-slide segue nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>¿Qué es eso del GDG?</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <p>Google Developer Groups (GDG) es una comunidad mundial interesada en aprender, utilizar y promover las múltiples tecnologías de aplicaciones que ofrece Google (y otras). Está centrada en los desarrolladores y en contenido de tipo técnico educativo.</p>
+      <p><a href="http:gdgtenerife.com">gdgtenerife.com</a></p>
+      <img src="images/GDG-Tenerife-Logo-Cuadrado250.png" class="reflect" alt="Description" title="Description">
+    </article>
+  </slide>
+
+    <slide>
+    <hgroup>
+      <h2>¿A quién va dirigido el taller?</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Desarrolladores Android</li>
+        <li>Otros Desarrolladores</li>
+        <li>...</li>
+        <li>Cualquiera?</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark quote nobackground">
+    <aside class="gdbar right bottom"><img src="images/google_developers_icon_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <q>
+        Los buenos artistas copian, los grandes artistas roban
+      </q>
+      <div class="author">
+        Pablo Picasso
+      </div>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>¿Qué es la ingeniería inversa?</h2>
+    </hgroup>
+    <article>
+      <p>
+        La ingeniería inversa (android) es el proceso de descubrir total o parcialmente el código fuente de una app, a través de una serie de procesos y programas.
+      </p>
+      <br><br>
+      <ul>
+        <li>Hardware</li>
+        <li>Software
+          <ul>
+            <li>Android en nuestro caso</li>
+          </ul>
+        </li>
+        <li>Ejemplos</li>
+      </ul>
+      <p><br><br>Producto final .... Código inicial</p>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>¿Pueden hacer Ingeniería Inversa a mis Aplicaciones?</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Security Tokens</li>
+        <li>Ver información (priveligiada o no)</li>
+        <li>Acceso no autorizado</li>
+        <li>Cheating</li>
+        <li>Copiar tu trabajo</li>
+        <li>Modificación (virus, keylogger,...)</li>
+        <li>...</li>
+      </ul>
+    </article>
+  </slide>
+
+    <slide>
+    <hgroup>
+      <h2>Estructura de un proyecto en Android</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+      <img src="images/estructuraPrograma.png" class="reflect" alt="Estructura" title="Estructura">
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>"Compilación" en Android</h2>
+    </hgroup>
+    <article>
+      <p>El proceso de compilación para las aplicaciones Android es el siguiente</p>
+      <ul class="build">
+        <li>Código Java</li>
+        <li>Compilación a Dalvik</li>
+        <li>Empaquetado</li>
+        <li>Firma</li>
+        <li>Distribución</li>
+      </ul>
+      <br><br>
+      <ul class="build fade">
+        <li>Vale, eso lo sabía.... y ahora???</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide class="segue dark nobackground">
+    <aside class="gdbar"><img src="images/google_developers_icon_128.png"></aside>
+    <hgroup class="auto-fadein">
+      <h2>A trabajar</h2>
+      <h3>Vamos al lío!</h3>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>A Trabajar</h2>
+    </hgroup>
+    <article>
+      <div class="columns-2">
+        <ul class="build">
+          <li>Obtener el fichero ".apk"</li>
+          <li>Des-empaquetar/De-compilar ".apk"</li>
+          <li>Recuperar ficheros XML y código Smali</li>
+          <li>Recuperando archivos .java</li>
+        </ul>
+        <ul>
+<img src="images/appTest.png" class="reflect" alt="Conejillo" title="Conejillo de Indias">
+        </ul>
+      </div>
+      <br>
+
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Herramientas de Interés</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>ApkLeecher v1.3.5</li>
+        <li>apktool</li>
+        <li>Dex2jar</li>
+        <li>jd-gui</li>
+        <li>jar signer</li>
+        <li>Keytool</li>
+        <li>OmegaT (para XML)</li>
+      </ul>
+    </article>
+  </slide>
+
+    <slide>
+    <hgroup>
+      <h2>Obtener el fichero ".apk"</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>ApkLeecher v1.3.5</li>
+          <ul>
+            <li>Configuración</li>
+            <ul>
+              <li>Edit - Option - Email, password Device ID=*#*#8255#*#* o Device ID de Play Store</li>
+              <li>Tenemos el ".apk" en la carpeta download</li>
+            </ul>
+          </ul>
+        <li>ES Explorador de Archivos (<a href="https://play.google.com/store/apps/developer?id=ES+APP+Group">Play Store</a>)</li>
+        <ul>
+          <ul>
+            <li>Botón superior izda - Herramientas - Gestor de aplicaciones - "click largo" en la app - Compartir</li>
+          </ul>
+
+        </ul>
+
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Des-empaquetar/De-compilar ".apk"</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Recuperamos imágenes</li>
+        <li>Copiamos archivo ".apk"</li>
+        <li>Renombramos a ".rar"</li>
+        <li>Descomprimimos, tendremos las imágenes en la carpeta "res"</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Recuperar XML y obtener código Smali</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Copiamos el ".apk" en la carpeta de apktool</li>
+        <li>Ejecutamos en un terminal:</li>
+      </ul>
+            <pre class="prettyprint" data-lang="shell">
+apktool.bat d aplicacion.apk
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Recuperar archivos ".java"</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>d2j-dex2jar.bat .apk</li>
+        <li>Obtenemos un fichero ...-dex2jar</li>
+        <li>Ejecutamos jd-gui e introducimos el fichero anterior</li>
+        <li>Guardamos y al descomprimir obtenemos los ficheros ".java"</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Errores típicos en la decompilación</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>Los <b>while (true)</b> suelen ser <b>switch</b> o <b>if</b></li>
+        <li>BuildConfig.java</li>
+        <li>R.java no va en la carpeta <b>src</b></li>
+        <li>Guardamos y al descomprimir obtenemos los ficheros ".java"</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>¿Podemos evitar la ingeniería inversa?</h2>
+    </hgroup>
+    <article>
+      <ul class="build fade">
+        <li>No</li>
+        <li>Pero podemos ofuscar más nuestro código:
+        <ul>
+          <li>Proguard</li>
+        </ul>
+        <li>Fichero <b>project.properties</b></li>
+          <ul>
+            <li>Descomentamos la línea</li>
+                        <pre class="prettyprint" data-lang="config">
+proguard.config=proguard.cfg
+</pre>
+          </ul>
+        <li>Fichero <b>proguard.cfg</b></li>
+          <ul>
+            <li>Añadir reglas de librerías con las que no funciona</li>
+            <li>dontwarn com.google.**</li>
+            <li>keep public class</li>
+            <li>com.vaipho.bluetooth.launcher.Utiles</li>
+          </ul>
+      </ul>
+    </article>
+  </slide>
+
+    <slide>
+    <hgroup>
+      <h2>Proguard</h2>
+    </hgroup>
+    <article class="flexbox vcenter">
+<img src="images/capturaProguard.png" class="reflect" alt="Proguard" title="Proguard">
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Fichero proguard.cfg (I)</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="config">
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+-optimizations !code/simplification/arithmetic,!field/ *,!class/merging/ *
+
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+-keep public class com.android.vending.licensing.ILicensingService
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View)
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+</pre>
+    </article>
+  </slide>
+
+    <slide>
+    <hgroup>
+      <h2>Fichero proguard.cfg (II)</h2>
+    </hgroup>
+    <article>
+      <pre class="prettyprint" data-lang="config">
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View)
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+</pre>
+    </article>
+  </slide>
+
+
+  <slide class="thank-you-slide segue nobackground">
+    <aside class="gdbar right"><img src="images/google_developers_icon_128.png"></aside>
+    <article class="flexbox vleft auto-fadein">
+      <h2>Gracias!</h2>
+      <p>Preguntas</p>
+    </article>
+    <p class="auto-fadein" data-config-contact>
+      <!-- populated from slide_config.json -->
+    </p>
+  </slide>
+
+  <slide class="logoslide dark nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/google_developers_logo_white.png"></span>
+    </article>
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
